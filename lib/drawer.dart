@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 
+const themeColor = Colors.blue;
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
@@ -20,7 +22,7 @@ class MyDrawer extends StatelessWidget {
       // RichText(),
       Linkify(
         onOpen: _onOpen,
-        text: "GitHub: https://github.com/Sciroccogti/foldest\n",
+        text: "GitHub: https://github.com/Sciroccogti/pool_counter",
       ),
     ];
 
@@ -33,7 +35,7 @@ class MyDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
             child: Text(
-              'Drawer Header',
+              'Pool Counter',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -49,14 +51,15 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(IconData(0xe61e, fontFamily: "iconfont"), color: Colors.red,),
-            title: const Text('斯诺克'),
+            title: const Text('Snooker'),
             onTap: () {
               Navigator.pushNamed(context, '/snooker');
             },
           ),
           ListTile(
             leading: const Icon(IconData(0xe63a, fontFamily: "iconfont"), color: Colors.black,),
-            title: const Text('八球'),
+            title: const Text('Eight-ball'),
+            enabled: false,
             onTap: () {
               Navigator.pushNamed(context, '/home');
             },
@@ -66,7 +69,7 @@ class MyDrawer extends StatelessWidget {
             applicationIcon: const FlutterLogo(),
             // TODO: substitute
             applicationName: 'Pool Counter',
-            applicationVersion: 'v0.1',
+            applicationVersion: 'v1.0',
             applicationLegalese: 'Made with love by Sciroccogti',
             aboutBoxChildren: aboutBoxChildren,
           ),

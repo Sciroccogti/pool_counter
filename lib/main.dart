@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo', // used by the OS task switcher
+      title: 'Pool Counter', // used by the OS task switcher
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
