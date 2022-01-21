@@ -2,10 +2,7 @@
 
 A score counter for pool, such as snooker and eight-ball.
 
-<center class="half">
-<img src="assets/screenshots/app-mockup-android-screenshot-1-default-1080x1920-1.png" width=33%/>
-<img src="assets/screenshots/app-mockup-android-screenshot-1-default-1080x1920-2.png" width=33%/>
-</center>
+<img src="assets/screenshots/app-mockup-android-screenshot-1-default-1080x1920-1.png" width=33%/><img src="assets/screenshots/app-mockup-android-screenshot-1-default-1080x1920-2.png" width=33%/>
 
 ## How to contribute
 
