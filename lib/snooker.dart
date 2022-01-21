@@ -11,8 +11,8 @@ class Snooker extends StatefulWidget {
 }
 
 class _SnookerState extends State<Snooker> {
-  int _curPlayer = 0;
-  var _scores_ = <int>[0, 0];
+  static int _curPlayer = 0;
+  static List<int> _scores_ = <int>[0, 0];
   // var _lastScores_ = <int>[0, 0]; // TODO: return
   static const Icon _playing = Icon(
     IconData(0xe655, fontFamily: "iconfont"),
@@ -22,7 +22,7 @@ class _SnookerState extends State<Snooker> {
     Icons.airline_seat_recline_normal_rounded,
     color: Colors.grey,
   );
-  var _icons_ = <Icon>[_playing, _waiting];
+  final _icons_ = <Icon>[_playing, _waiting];
 
   @override
   Widget build(BuildContext context) {
@@ -35,22 +35,14 @@ class _SnookerState extends State<Snooker> {
               _icons_[0],
               Expanded(
                   child: MaterialSegmentedControl(
-                children: {
-                  0: Container(
-                    // padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: const Text(
-                      "Player1",
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    // color: Colors.teal[300],
+                children: const {
+                  0: Text(
+                    "Player1",
+                    style: TextStyle(fontSize: 24),
                   ),
-                  1: Container(
-                    // padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: const Text(
-                      "Player2",
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    // color: Colors.teal[300],
+                  1: Text(
+                    "Player2",
+                    style: TextStyle(fontSize: 24),
                   ),
                 },
                 selectionIndex: _curPlayer,
@@ -89,7 +81,7 @@ class _SnookerState extends State<Snooker> {
                   )),
               const Text(
                 ":",
-                style: const TextStyle(fontSize: 64, color: themeColor),
+                style: TextStyle(fontSize: 64, color: themeColor),
               ),
               TextButton(
                   onPressed: () => showMaterialNumberPicker(
@@ -197,7 +189,7 @@ class _SnookerState extends State<Snooker> {
         appBar: AppBar(
           title: const Text('Snooker'),
         ),
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         floatingActionButton:
             Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           FloatingActionButton(

@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 
 const themeColor = Colors.blue;
+String appName = "", version = ""; // from ./pubspec.yaml
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -30,13 +31,13 @@ class MyDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
+          DrawerHeader(
+            decoration: const BoxDecoration(
               color: Colors.blue,
             ),
             child: Text(
-              'Pool Counter',
-              style: TextStyle(
+              appName,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
               ),
@@ -50,14 +51,16 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(IconData(0xe61e, fontFamily: "iconfont"), color: Colors.red,),
+            leading: const Icon(
+              IconData(0xe61e, fontFamily: "iconfont"), color: Colors.red,),
             title: const Text('Snooker'),
             onTap: () {
               Navigator.pushNamed(context, '/snooker');
             },
           ),
           ListTile(
-            leading: const Icon(IconData(0xe63a, fontFamily: "iconfont"), color: Colors.black,),
+            leading: const Icon(
+              IconData(0xe63a, fontFamily: "iconfont"), color: Colors.black,),
             title: const Text('Eight-ball'),
             enabled: false,
             onTap: () {
@@ -68,8 +71,8 @@ class MyDrawer extends StatelessWidget {
             icon: const Icon(Icons.info),
             applicationIcon: const FlutterLogo(),
             // TODO: substitute
-            applicationName: 'Pool Counter',
-            applicationVersion: 'v1.0',
+            applicationName: appName,
+            applicationVersion: version,
             applicationLegalese: 'Made with love by Sciroccogti',
             aboutBoxChildren: aboutBoxChildren,
           ),

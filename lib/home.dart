@@ -23,21 +23,21 @@ class _HomeState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('Home'),
         ),
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         floatingActionButton:
             Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           FloatingActionButton(
-            child: Icon(Icons.delete),
+            child: const Icon(Icons.delete),
             onPressed: () => setState(() {
               _count = 0;
             }),
             heroTag: null,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           FloatingActionButton(
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             // onPressed: () => _someFunc(),
             onPressed: () => setState(() {
               _count++;
