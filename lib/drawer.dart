@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 
-const themeColor = Colors.blue;
+const primaryColor = Colors.indigo;
+// const a = Colors.
+const secondaryColor = Colors.indigoAccent;
 String appName = "", version = ""; // from ./pubspec.yaml
 
 class MyDrawer extends StatelessWidget {
@@ -33,7 +35,7 @@ class MyDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: primaryColor,
             ),
             child: Text(
               appName,
@@ -52,7 +54,9 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
-              IconData(0xe61e, fontFamily: "iconfont"), color: Colors.red,),
+              IconData(0xe61e, fontFamily: "iconfont"),
+              color: Colors.red,
+            ),
             title: const Text('Snooker'),
             onTap: () {
               Navigator.pushNamed(context, '/snooker');
@@ -60,7 +64,9 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
-              IconData(0xe63a, fontFamily: "iconfont"), color: Colors.black,),
+              IconData(0xe63a, fontFamily: "iconfont"),
+              color: Colors.black,
+            ),
             title: const Text('Eight-ball'),
             enabled: false,
             onTap: () {

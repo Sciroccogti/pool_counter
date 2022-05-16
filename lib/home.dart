@@ -27,22 +27,21 @@ class _HomeState extends State<HomePage> {
         floatingActionButton:
             Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           FloatingActionButton(
-            child: const Icon(Icons.delete),
             onPressed: () => setState(() {
               _count = 0;
             }),
             heroTag: null,
+            child: const Icon(Icons.delete),
           ),
           const SizedBox(
             height: 10,
           ),
           FloatingActionButton(
-            child: const Icon(Icons.add),
-            // onPressed: () => _someFunc(),
             onPressed: () => setState(() {
               _count++;
             }),
             heroTag: null,
+            child: const Icon(Icons.add),
           )
         ]));
   }

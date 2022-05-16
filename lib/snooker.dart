@@ -3,6 +3,23 @@ import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'drawer.dart';
 
+const scoreSize = Size(128, 1);
+
+Icon getBallIcon(Color color) {
+  return Icon(
+    Icons.circle,
+    color: color,
+    size: 64,
+    shadows: const [
+      Shadow(
+        blurRadius: 15,
+        offset: Offset(0.0, 2.0),
+        color: Colors.grey,
+      )
+    ],
+  );
+}
+
 class Snooker extends StatefulWidget {
   Snooker({Key? key}) : super(key: key);
 
@@ -16,7 +33,7 @@ class _SnookerState extends State<Snooker> {
   // var _lastScores_ = <int>[0, 0]; // TODO: return
   static const Icon _playing = Icon(
     IconData(0xe655, fontFamily: "iconfont"),
-    color: themeColor,
+    color: primaryColor,
   );
   static const Icon _waiting = Icon(
     Icons.airline_seat_recline_normal_rounded,
@@ -38,18 +55,17 @@ class _SnookerState extends State<Snooker> {
                 children: const {
                   0: Text(
                     "Player1",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   1: Text(
                     "Player2",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 },
                 selectionIndex: _curPlayer,
-                borderColor: Colors.grey,
-                selectedColor: themeColor,
+                borderColor: Colors.black,
+                selectedColor: secondaryColor,
                 unselectedColor: Colors.white,
-                borderRadius: 16.0,
                 onSegmentChosen: (int index) {
                   setState(() {
                     _curPlayer = index;
@@ -64,6 +80,7 @@ class _SnookerState extends State<Snooker> {
           ),
           const SizedBox(height: 16),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
                   onPressed: () => showMaterialNumberPicker(
@@ -75,30 +92,35 @@ class _SnookerState extends State<Snooker> {
                         onChanged: (value) =>
                             setState(() => _scores_[0] = value),
                       ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(scoreSize),
+                  ),
                   child: Text(
                     "${_scores_[0]}",
                     style: const TextStyle(fontSize: 64),
                   )),
               const Text(
                 ":",
-                style: TextStyle(fontSize: 64, color: themeColor),
+                style: TextStyle(fontSize: 64, color: primaryColor),
               ),
               TextButton(
                   onPressed: () => showMaterialNumberPicker(
                         context: context,
-                        title: "Score of Player1",
+                        title: "Score of Player2",
                         maxNumber: 147,
                         minNumber: 0,
                         selectedNumber: _scores_[1],
                         onChanged: (value) =>
                             setState(() => _scores_[1] = value),
                       ),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(scoreSize),
+                  ),
                   child: Text(
                     "${_scores_[1]}",
                     style: const TextStyle(fontSize: 64),
                   )),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
           Expanded(
             child: GridView.count(
@@ -109,68 +131,47 @@ class _SnookerState extends State<Snooker> {
               crossAxisCount: 3,
               children: <Widget>[
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer]++;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Color(0xFFFF0000),
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer]++;
+                  }),
+                  icon: getBallIcon(const Color(0xFFFF0000)),
+                ),
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer] += 2;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Colors.yellow,
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer] += 2;
+                  }),
+                  icon: getBallIcon(Colors.yellow),
+                ),
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer] += 3;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Colors.green,
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer] += 3;
+                  }),
+                  icon: getBallIcon(Colors.green),
+                ),
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer] += 4;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Color(0xFFA52A2A),
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer] += 4;
+                  }),
+                  icon: getBallIcon(const Color(0xFFA52A2A)),
+                ),
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer] += 5;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Colors.blue,
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer] += 5;
+                  }),
+                  icon: getBallIcon(Colors.blue),
+                ),
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer] += 6;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Color(0xFFFF7FFF),
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer] += 6;
+                  }),
+                  icon: getBallIcon(const Color(0xFFFF7FFF)),
+                ),
                 IconButton(
-                    onPressed: () => setState(() {
-                          _scores_[_curPlayer] += 7;
-                        }),
-                    icon: const Icon(
-                      Icons.circle,
-                      color: Colors.black,
-                      size: 64,
-                    )),
+                  onPressed: () => setState(() {
+                    _scores_[_curPlayer] += 7;
+                  }),
+                  icon: getBallIcon(Colors.black),
+                ),
                 IconButton(
                   onPressed: () => setState(() {
                     _scores_[1 - _curPlayer] += 4;
@@ -179,6 +180,13 @@ class _SnookerState extends State<Snooker> {
                     Icons.warning_rounded,
                     color: Colors.red,
                     size: 64,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 15,
+                        offset: Offset(0.0, 2.0),
+                        color: Colors.grey,
+                      )
+                    ],
                   ),
                   tooltip: "罚 4 分",
                 ),

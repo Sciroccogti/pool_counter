@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appName, // used by the OS task switcher
       theme: ThemeData(
-        primarySwatch: themeColor,
+        useMaterial3: true,
+        primarySwatch: primaryColor,
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.android: ZoomPageTransitionsBuilder(),
