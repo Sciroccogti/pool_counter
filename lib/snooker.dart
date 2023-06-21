@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-import 'package:material_segmented_control/material_segmented_control.dart';
 import 'drawer.dart';
 
 const scoreSize = Size(128, 1);
@@ -27,8 +27,11 @@ class Snooker extends StatefulWidget {
   _SnookerState createState() => _SnookerState();
 }
 
+enum Players { player1, player2 }
+
 class _SnookerState extends State<Snooker> {
   static int _curPlayer = 0;
+  Players playerView = Players.player1;
   static List<int> _scores_ = <int>[0, 0];
   // var _lastScores_ = <int>[0, 0]; // TODO: return
   static const Icon _playing = Icon(
@@ -39,7 +42,6 @@ class _SnookerState extends State<Snooker> {
     Icons.airline_seat_recline_normal_rounded,
     color: Colors.grey,
   );
-  final _icons_ = <Icon>[_playing, _waiting];
 
   @override
   Widget build(BuildContext context) {
@@ -49,32 +51,22 @@ class _SnookerState extends State<Snooker> {
           Row(
             children: [
               const SizedBox(width: 16),
-              _icons_[0],
               Expanded(
-                  child: MaterialSegmentedControl(
-                children: const {
-                  0: Text(
-                    "Player1",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  1: Text(
-                    "Player2",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                },
-                selectionIndex: _curPlayer,
-                borderColor: Colors.black,
-                selectedColor: secondaryColor,
-                unselectedColor: Colors.white,
-                onSegmentChosen: (int index) {
+                  child: SegmentedButton<int>(
+                segments: const [
+                  ButtonSegment<int>(
+                      value: 0, label: Text('Player1'), icon: _waiting),
+                  ButtonSegment<int>(
+                      value: 1, label: Text('Player2'), icon: _waiting),
+                ],
+                selected: <int>{_curPlayer},
+                onSelectionChanged: (Set<int> newSelection) {
                   setState(() {
-                    _curPlayer = index;
-                    _icons_[_curPlayer] = _playing;
-                    _icons_[1 - _curPlayer] = _waiting;
+                    _curPlayer = newSelection.first;
                   });
                 },
+                selectedIcon: _playing,
               )),
-              _icons_[1],
               const SizedBox(width: 16),
             ],
           ),
@@ -125,57 +117,82 @@ class _SnookerState extends State<Snooker> {
           Expanded(
             child: GridView.count(
               primary: false,
-              padding: const EdgeInsets.all(20),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              padding: const EdgeInsets.all(32),
+              crossAxisSpacing: 32,
+              mainAxisSpacing: 32,
               crossAxisCount: 3,
               children: <Widget>[
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer]++;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 1;
+                    });
+                  },
                   icon: getBallIcon(const Color(0xFFFF0000)),
+                  enableFeedback: true,
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer] += 2;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 2;
+                    });
+                  },
                   icon: getBallIcon(Colors.yellow),
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer] += 3;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 3;
+                    });
+                  },
                   icon: getBallIcon(Colors.green),
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer] += 4;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 4;
+                    });
+                  },
                   icon: getBallIcon(const Color(0xFFA52A2A)),
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer] += 5;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 5;
+                    });
+                  },
                   icon: getBallIcon(Colors.blue),
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer] += 6;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 6;
+                    });
+                  },
                   icon: getBallIcon(const Color(0xFFFF7FFF)),
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[_curPlayer] += 7;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[_curPlayer] += 7;
+                    });
+                  },
                   icon: getBallIcon(Colors.black),
                 ),
                 IconButton(
-                  onPressed: () => setState(() {
-                    _scores_[1 - _curPlayer] += 4;
-                  }),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    setState(() {
+                      _scores_[1 - _curPlayer] += 4;
+                    });
+                  },
                   icon: const Icon(
                     Icons.warning_rounded,
                     color: Colors.red,
@@ -201,11 +218,14 @@ class _SnookerState extends State<Snooker> {
         floatingActionButton:
             Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           FloatingActionButton(
-            child: const Icon(Icons.delete),
-            onPressed: () => setState(() {
-              _scores_ = [0, 0];
-            }),
+            onPressed: () {
+              HapticFeedback.vibrate();
+              setState(() {
+                _scores_ = [0, 0];
+              });
+            },
             heroTag: null,
+            child: const Icon(Icons.delete),
           ),
         ]));
   }

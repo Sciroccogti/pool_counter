@@ -6,6 +6,12 @@ A score counter for pool, such as snooker and eight-ball.
 
 ## How to contribute
 
+### Gen icon
+
+dart run flutter_launcher_icons -f ./flutter_launcher_icons.yaml
+
+### Build
+
 ```bash
 flutter build apk --release
 ```
@@ -18,3 +24,15 @@ Execution failed for task ':app:lintVitalRelease'.
 ```
 
 Then may be needed to update *gradle* version.
+
+### Sign
+
+Follow this: [Signing the app](https://docs.flutter.dev/deployment/android#signing-the-app)
+```bash
+keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+```
+
+Then run: 
+```bash
+jarsigner -verbose -keystore ~/android-keystore.jks -signedjar signed.apk CoolApkDevVerify_no_sign.apk upload
+```
